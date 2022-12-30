@@ -18,5 +18,11 @@
         {
             return Pieces[row, column];
         }
+
+        public void PutChessPiece(Piece p, Position pos)
+        {
+            Pieces[pos.Row,pos.Column] = p;
+            p.Position = pos;
+        }
     }
 }
