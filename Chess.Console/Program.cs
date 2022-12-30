@@ -7,9 +7,10 @@ namespace Chess
     {
         static void Main(string[] args)
         {
-            Position board = new Position(3, 4);
+            Chessboard chessboard = new Chessboard(8, 8);
+            
+            Screen.PrintChessboard(chessboard);
 
-            Console.WriteLine("Position: " + board);
             Console.ReadKey();
         }
     }

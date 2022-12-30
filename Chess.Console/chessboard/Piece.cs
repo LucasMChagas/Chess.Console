@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Chess.Console.chessboard
+﻿namespace chessboard
 {
     internal class Piece
     {
+        public Position Position { get; set; }
+        public Color Color { get; protected set; }
+        public int NumberOfMovements { get; protected set; }
+        public Chessboard Board { get; protected set; }
+
+        public Piece(Position position, Color color, Chessboard board)
+        {
+            Position = position;
+            Color = color;
+            Board = board;
+            NumberOfMovements = 0;
+        }
+
+
     }
 }
