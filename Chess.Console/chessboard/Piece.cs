@@ -15,6 +15,11 @@
             NumberOfMovements = 0;
         }
 
+        public void IncrementMovements()
+        {
+            NumberOfMovements++;
+        }
+
 
     }
 }

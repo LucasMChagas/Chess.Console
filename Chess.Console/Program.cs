@@ -10,16 +10,21 @@ namespace Chess
         {
             try
             {
-                Chessboard chessboard = new Chessboard(8, 8);
+                ChessGame game = new ChessGame();
 
-                chessboard.PutChessPiece(new Rook(Color.Black, chessboard), new Position(0, 0));
-                chessboard.PutChessPiece(new Rook(Color.White, chessboard), new Position(0, 1));
+                while(game.Finished == false)
+                {
+                    Console.Clear();
+                    Screen.PrintChessboard(game.Chessboard);
 
+                    Console.Write("Digite a posição de origem");
+                    Position home = Screen.ReadPosition().ToPositon();
+                    Console.Write("Digite a posição de origem");
+                    Position destination = Screen.ReadPosition().ToPositon();
 
+                    game.ExecuteMovement(home, destination);
 
-                Screen.PrintChessboard(chessboard);
-
-               
+                }
             }
             catch(ChessboardExeption ex)
             {
