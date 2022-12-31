@@ -1,4 +1,5 @@
 ﻿using chessboard;
+using chess;
 using System;
 
 namespace Chess
@@ -7,13 +8,25 @@ namespace Chess
     {
         static void Main(string[] args)
         {
-            Chessboard chessboard = new Chessboard(8, 8);
+            try
+            {
+                Chessboard chessboard = new Chessboard(8, 8);
 
-            
-            
-            Screen.PrintChessboard(chessboard);
+                chessboard.PutChessPiece(new Rook(Color.Black, chessboard), new Position(0, 0));
+                chessboard.PutChessPiece(new Rook(Color.White, chessboard), new Position(0, 1));
 
+
+
+                Screen.PrintChessboard(chessboard);
+
+               
+            }
+            catch(ChessboardExeption ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             Console.ReadKey();
+
         }
     }
 }
