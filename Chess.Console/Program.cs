@@ -14,15 +14,36 @@ namespace Chess
 
                 while(game.Finished == false)
                 {
-                    Console.Clear();
-                    Screen.PrintChessboard(game.Chessboard);
+                    try
+                    {
+                        Console.Clear();
+                        Screen.PrintChessboard(game.Chessboard);
+                        Console.WriteLine();
+                        Console.WriteLine("Turno: " + game.Turn);
+                        Console.WriteLine("Aguardando jogada: " + game.Player);
 
-                    Console.Write("Digite a posição de origem");
-                    Position home = Screen.ReadPosition().ToPositon();
-                    Console.Write("Digite a posição de origem");
-                    Position destination = Screen.ReadPosition().ToPositon();
+                        Console.Write("Digite a posição de origem");
+                        Position home = Screen.ReadPosition().ToPositon();
+                        game.ValidHomePosition(home);
 
-                    game.ExecuteMovement(home, destination);
+                        bool[,] possiblePositions = game.Chessboard.Piece(home).PossibleMoves();
+
+                        Console.Clear();
+                        Screen.PrintChessboard(game.Chessboard, possiblePositions);
+
+                        Console.WriteLine();
+                        Console.Write("Digite a posição de destino");
+                        Position destination = Screen.ReadPosition().ToPositon();
+                        game.ValidDestinationPosition(home, destination);
+
+                        game.PerformMove(home, destination);
+                    }
+                    catch(ChessboardExeption ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        Console.ReadLine();
+                    }
+                    
 
                 }
             }

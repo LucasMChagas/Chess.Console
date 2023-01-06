@@ -13,6 +13,12 @@ namespace chessboard
             Column = column;
         }        
 
+        public void SetValues(int row, int column)
+        {
+            this.Row = row;
+            this.Column = column;
+        }
+
         public override string ToString()
         {
             StringBuilder toString = new StringBuilder();
