@@ -17,11 +17,9 @@ namespace Chess
                     try
                     {
                         Console.Clear();
-                        Screen.PrintChessboard(game.Chessboard);
+                        Screen.PrintGame(game);
+                        
                         Console.WriteLine();
-                        Console.WriteLine("Turno: " + game.Turn);
-                        Console.WriteLine("Aguardando jogada: " + game.Player);
-
                         Console.Write("Digite a posição de origem");
                         Position home = Screen.ReadPosition().ToPositon();
                         game.ValidHomePosition(home);

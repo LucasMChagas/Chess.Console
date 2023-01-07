@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using chessboard;
 
 namespace chess
@@ -9,6 +10,8 @@ namespace chess
         public int Turn { get; private set; }
         public Color Player { get; private set; }
         public bool Finished { get; private set; }
+        private HashSet<Piece> Pieces;
+        private HashSet<Piece> Captured;
 
         public ChessGame()
         {
@@ -16,6 +19,8 @@ namespace chess
             Turn = 1;
             Player = Color.White;
             Finished = false;
+            Captured = new HashSet<Piece>();
+            Pieces = new HashSet<Piece>();
             PutPieces();
         }
 
@@ -25,6 +30,10 @@ namespace chess
             p.IncrementMovements();
             Piece CapturedPiece = Chessboard.RemoveChessPiece(destination);
             Chessboard.PutChessPiece(p, destination);
+            if(CapturedPiece != null)
+            {
+                Captured.Add(CapturedPiece);
+            }
         }
         public void PerformMove( Position home, Position destination)
         {
@@ -67,9 +76,39 @@ namespace chess
                 Player = Color.White;
             }
         }
+        public HashSet<Piece> CapturedPieces(Color color)
+        {
+            HashSet<Piece> aux = new HashSet<Piece>();
+            foreach (Piece piece in Captured)
+            {
+                if (piece.Color == color)
+                {
+                    aux.Add(piece);
+                }                
+            }
+            return aux;
+        }
+        public HashSet<Piece> PiecesInGame(Color color)
+        {
+            HashSet<Piece> aux = new HashSet<Piece>();
+            foreach (Piece piece in Pieces)
+            {
+                if (piece.Color == color)
+                {
+                    aux.Add(piece);
+                }
+            }
+            aux.ExceptWith(CapturedPieces(color));
+            return aux;
+        }
+        public void PutNewPiece(char column, int row, Piece piece)
+        {
+            Chessboard.PutChessPiece(piece, new ChessPosition(column, row).ToPositon());
+            Pieces.Add(piece);
+        }
         private void PutPieces()
         {
-            Chessboard.PutChessPiece(new Rook(Color.Black, Chessboard), new ChessPosition('h', 1).ToPositon());
+            PutNewPiece('a', 1, new Rook(Color.White, Chessboard));
             
         }
     }
