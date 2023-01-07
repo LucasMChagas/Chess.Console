@@ -22,6 +22,10 @@
         {
             NumberOfMovements++;
         }
+        public void decrementMovements()
+        {
+            NumberOfMovements--;
+        }
         public bool ThereArePossibleMoves()
         {
             bool[,] mat = PossibleMoves();

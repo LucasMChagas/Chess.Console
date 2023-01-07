@@ -15,6 +15,10 @@ namespace Chess
             Console.WriteLine();
             Console.WriteLine("Turno: " + game.Turn);
             Console.WriteLine("Aguardando jogada: " + game.Player);
+            if (game.Check)
+            {
+                Console.WriteLine("XEQUE!");
+            }
         }
 
         public static void PrintCapturedPieces(ChessGame game)
